@@ -1,4 +1,11 @@
 import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import {
   AfterViewInit,
   Component,
   EventEmitter,
@@ -16,12 +23,23 @@ import { TableColumn } from 'src/app/core/models/table-column.model';
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
+    ]),
+  ],
 })
 export class TableComponent implements OnInit {
   public tableDataSource: MatTableDataSource<any> = new MatTableDataSource<any>(
     []
   );
   public displayedColumns: string[] = [];
+  public expandedElement: any | null;
 
   @ViewChild(MatPaginator) set matPaginator(paginator: MatPaginator) {
     this.tableDataSource.paginator = paginator;
@@ -34,8 +52,11 @@ export class TableComponent implements OnInit {
   @Input() isSortable: boolean = false;
   @Input() isFilterable: boolean = false;
   @Input() tableColumns: TableColumn[] = [];
+  @Input() tableChildColumns: TableColumn[] = [];
   @Input() menuActionsIcon: string = 'more_horiz';
   @Input() showMenuActions: boolean = false;
+  @Input() showShadow: boolean = true;
+  @Input() isRowExpanded: boolean = false;
   @Input() paginationSizes: number[] = [5, 10, 15];
   @Input() defaultPageSize: number = this.paginationSizes[0];
 
@@ -55,6 +76,10 @@ export class TableComponent implements OnInit {
       this.displayedColumns.push('menuActions');
     } else {
       this.displayedColumns = this.tableColumns.map((column) => column.name);
+    }
+
+    if (this.isRowExpanded) {
+      this.displayedColumns = ['expand', ...this.displayedColumns];
     }
   }
 

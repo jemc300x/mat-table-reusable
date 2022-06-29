@@ -1,5 +1,7 @@
-:host {
+.table-container {
+  border-radius: 10px;
   table.mat-table {
+    border-radius: inherit;
     width: 100%;
     tr.mat-header-row {
       th.mat-header-cell {
@@ -17,5 +19,30 @@
         }
       }
     }
+    tr.example-detail-row {
+      height: 0;
+      td {
+        padding: 5;
+      }
+    }
+
+    tr.example-element-row:not(.example-expanded-row):hover {
+      background: whitesmoke;
+    }
+
+    tr.example-element-row:not(.example-expanded-row):active {
+      background: #efefef;
+    }
+
+    .example-element-row td {
+      border-bottom-width: 0;
+    }
+
+    .example-element-detail {
+      overflow: hidden;
+    }
+  }
+  .mat-paginator {
+    border-radius: inherit;
   }
 }

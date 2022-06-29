@@ -1,3 +1,4 @@
 <p>customers works!</p>
 <app-table [isFilterable]="true" [dataSource]="data" [tableColumns]="tableColumns" [isPageable]="true"
-  [showMenuActions]="true" (menuAction)="onMenuAction($event)"></app-table>
+  [isRowExpanded]="true" [showMenuActions]="true" [tableChildColumns]="tableChildColumns"
+  (menuAction)="onMenuAction($event)"></app-table>

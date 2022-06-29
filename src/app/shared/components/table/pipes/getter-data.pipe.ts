@@ -8,15 +8,15 @@ import { TableColumn } from 'src/app/core/models/table-column.model';
 export class GetterDataPipe implements PipeTransform {
   transform(value: any, column: TableColumn): unknown {
     let displayValue = value[column.dataKey];
-    const typeOfDisplayValue = typeof displayValue;
 
     if (column.format === undefined) {
       return displayValue;
     }
 
+    const typeOfDisplayValue = typeof displayValue;
     switch (typeOfDisplayValue) {
       case 'number':
-        const formatNumber = new DecimalPipe('en-EN');
+        const formatNumber = new DecimalPipe('en-US');
         displayValue = formatNumber.transform(displayValue, column.format);
         break;
 
@@ -26,7 +26,7 @@ export class GetterDataPipe implements PipeTransform {
       case 'object':
         const isDate = this.isDate(displayValue);
         if (isDate) {
-          displayValue = new DatePipe('en-EN').transform(
+          displayValue = new DatePipe('en-US').transform(
             displayValue,
             column.format
           );
