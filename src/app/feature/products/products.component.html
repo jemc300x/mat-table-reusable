@@ -1,2 +1,3 @@
 <p>products works!</p>
-<app-table [dataSource]="data" [tableColumns]="tableColumns"></app-table>
+<app-table [dataSource]="data" [tableColumns]="tableColumns" [showMenuActions]="true"
+  (menuAction)="onMenuAction($event)"></app-table>

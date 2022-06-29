@@ -76,6 +76,5 @@ export class TableComponent implements OnInit {
 
   onMenuSelectAction(row: any) {
     this.menuAction.emit(row);
-    console.log(row);
   }
 }

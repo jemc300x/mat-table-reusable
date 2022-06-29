@@ -47,10 +47,15 @@ export class ProductsComponent implements OnInit {
       dataKey: 'productPrice',
       alignContent: 'end',
       isSortable: true,
+      format: '.2-2',
     },
   ];
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  onMenuAction(action: any) {
+    console.log(action);
+  }
 }

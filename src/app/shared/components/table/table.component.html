@@ -28,7 +28,7 @@
 
       <!-- data -->
       <td mat-cell *matCellDef="let element" [class]="'text-align-'+ tableColumn.alignContent">
-        {{ element | getterData: tableColumn.dataKey }}
+        {{ element | getterData: tableColumn }}
       </td>
     </ng-container>
 
